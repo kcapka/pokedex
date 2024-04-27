@@ -59,7 +59,7 @@ export default function PokemonCard({id, cardOpen, setCardOpen}:any) {
                 ))}
               </div>
             </div>
-            <img onClick={()=>setCardOpen(false)} className="absolute top-2 right-2 cursor-pointer w-5" src="/public/icons/x-solid.svg" alt="Exit" />
+            <img onClick={()=>setCardOpen(false)} className="absolute top-2 right-2 cursor-pointer w-5" src="/icons/x-solid.svg" alt="Exit" />
           </div>
           )}
         </section>
