@@ -1,0 +1,54 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.hidden-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.pixel-font {
+    font-family: 'Jersey 10', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+@layer utilities {
+    .default-px {
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+    @media (max-width: 991.98px) {
+      .default-px {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    }
+    @media (max-width: 480px) {
+      .default-px {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+    .default-py {
+      padding-top: 128px;
+      padding-bottom: 128px;
+    }
+    @media (max-width: 991.98px) {
+      .default-py {
+        padding-top: 96px;
+        padding-bottom: 96px;
+      }
+    }
+    @media (max-width: 480px) {
+      .default-py {
+        padding-top: 64px;
+        padding-bottom: 64px;
+      }
+    }
+}
+
