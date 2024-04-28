@@ -9,6 +9,7 @@ export default function PokeListAll() {
   const [cardOpen, setCardOpen] = useState(false);
   const [selectedId, setSelectedId] = useState();
   const [nameSearch, setNameSearch] = useState("");
+  const [noResults, setNoResults] = useState(false);
   //selected page is in increments of 100. 0 is page 1, 100 is page 2, etc.
   const [selectedPage, setSelectedPage] = useState(0);
   //showAll is only used to trigger listing of all pokemon. Value has no meaning.
@@ -16,6 +17,7 @@ export default function PokeListAll() {
 
   //Default which searches all pokemon if no search is typed
   useEffect(() => {
+    setNoResults(false);
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -45,10 +47,12 @@ export default function PokeListAll() {
   //Below handles search request
   function handleNameSearch() {
     if (nameSearch) {
+      setNoResults(false);
+      const searchData = nameSearch.toLowerCase();
       const fetchData = async () => {
         try {
           const response = await fetch(
-            `https://pokeapi.co/api/v2/pokemon/${nameSearch}`
+            `https://pokeapi.co/api/v2/pokemon/${searchData}`
           );
           const data = await response.json();
           let newPokemonData: any = [];
@@ -61,7 +65,8 @@ export default function PokeListAll() {
           newPokemonData.push(newPokemon);
           setPokemon(newPokemonData);
         } catch (error) {
-          alert("Your search did not yield any results!");
+          setPokemon([]);
+          setNoResults(true);
         }
       };
       fetchData();
@@ -77,14 +82,23 @@ export default function PokeListAll() {
   }
 
   function handleShowAll() {
+    //triggers useEffect to fetch all pokemon again
     setShowAll(!showAll);
     setSelectedPage(0);
   }
 
   return (
-    <div className="flex flex-col items-center pixel-font default-py default-px bg-pokemon-dark-blue">
+    <div className="flex flex-col items-center pixel-font default-py default-px bg-pokemon-dark-blue min-h-[100svh]">
       <img src="/images/logo/logo.png" alt="Pokedex logo" className="mb-20" />
       <div className="flex flex-col items-center">
+      <Link to="#pagination">
+          <p
+            className="text-2xl text-white text-center mb-5 md:mb-10 bg-pokemon-blue px-5 py-3 rounded cursor-pointer hover:bg-white hover:text-black duration-300 box-shadow"
+            onClick={handleShowAll}
+          >
+            Show All Pokemon
+          </p>
+        </Link>
         <h2 className="text-white mb-5 md:mb-10 text-3xl md:text-5xl text-center">
           Search Pokemon by name or ID
         </h2>
@@ -95,26 +109,15 @@ export default function PokeListAll() {
             onChange={(e) => {
               setNameSearch(e.target.value);
             }}
-            className="px-5 py-3 rounded-[40px] text-xl"
+            className="px-5 py-3 rounded text-xl outline-none"
           />
           <button
             onClick={handleNameSearch}
-            className="text-white text-2xl bg-pokemon-blue px-5 py-3 rounded-[40px] box-shadow hover:bg-white hover:text-black duration-300"
+            className="text-white text-2xl bg-pokemon-blue px-5 py-3 rounded box-shadow hover:bg-white hover:text-black duration-300"
           >
             Search
           </button>
         </div>
-        <p className="text-3xl md:text-5xl text-white text-center mt-5 md:mt-10">
-          Or
-        </p>
-        <Link to="#pagination">
-          <p
-            className="text-2xl text-white text-center mt-5 md:mt-10 bg-pokemon-blue px-5 py-3 rounded-[40px] cursor-pointer hover:bg-white hover:text-black duration-300 box-shadow"
-            onClick={handleShowAll}
-          >
-            Show All Pokemon
-          </p>
-        </Link>
       </div>
       {pokemon.length > 1 && (
         <Pagination
@@ -122,38 +125,45 @@ export default function PokeListAll() {
           setSelectedPage={setSelectedPage}
         />
       )}
-      <div
-        className={`${
-          pokemon.length == 1
-            ? "flex justify-center"
-            : "grid grid-cols-2 md:grid-cols-3 justify-items-center gap-10"
-        } max-w-[800px] mx-auto mt-10 md:mt-20`}
-      >
-        {pokemon.map(({ name, url, image, id, sprites }, index) => (
-          <motion.div
-            className="cursor-pointer bg-pokemon-blue flex flex-col items-center justify-center p-3 md:p-5 w-[150px] md:w-[200px] h-[150px] md:h-[200px] rounded shadow-2xl border border-pokemon-yellow"
-            key={id}
-            onClick={() => handleSelectedPokemon(id)}
-            initial={{ opacity: 0 }}
-            transition={{ opacity: { duration: 1 } }}
-            animate={{ opacity: 1 }}
-            whileHover={{ scale: 1.1 }}
-          >
-            <img
-              src={image}
-              alt={`${name} image`}
-              className="w-[75px] md:w-[100px]"
-            />
-            <p className="text-xl capitalize">{name}</p>
-            <p className="text-xl">#{id}</p>
-          </motion.div>
-        ))}
-      </div>
+      {pokemon && (
+        <div
+          className={`${
+            pokemon.length == 1
+              ? "flex justify-center"
+              : "grid grid-cols-2 md:grid-cols-3 justify-items-center gap-10"
+          } max-w-[800px] mx-auto mt-10 md:mt-20`}
+        >
+          {pokemon.map(({ name, url, image, id, sprites }, index) => (
+            <motion.div
+              className="cursor-pointer bg-pokemon-blue flex flex-col items-center justify-center p-3 md:p-5 w-[150px] md:w-[200px] h-[150px] md:h-[200px] rounded shadow-2xl border border-pokemon-yellow"
+              key={id}
+              onClick={() => handleSelectedPokemon(id)}
+              initial={{ opacity: 0 }}
+              transition={{ opacity: { duration: 1 } }}
+              animate={{ opacity: 1 }}
+              whileHover={{ scale: 1.1 }}
+            >
+              <img
+                src={image}
+                alt={`${name} image`}
+                className="w-[75px] md:w-[100px]"
+              />
+              <p className="text-xl capitalize">{name}</p>
+              <p className="text-xl">#{id}</p>
+            </motion.div>
+          ))}
+        </div>
+      )}
       {pokemon.length > 1 && (
         <Pagination
           selectedPage={selectedPage}
           setSelectedPage={setSelectedPage}
         />
+      )}
+      {noResults && (
+        <div>
+          <p className="text-center text-2xl text-white">Oh no! No results match your search. Try again!</p>
+        </div>
       )}
       {cardOpen && (
         <PokemonCard

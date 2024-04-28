@@ -43,6 +43,7 @@ export default function PokeListAll() {
   }, [selectedPage, showAll]);
 
   //Below handles search request
+
   function handleNameSearch() {
     if (nameSearch) {
       const fetchData = async () => {

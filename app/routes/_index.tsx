@@ -24,7 +24,7 @@ export default function Index() {
         <PokeHero />
         <div className="mt-20 flex justify-center">
           <Link to="/home">
-            <button className="pixel-font text-white text-5xl text-center">Enter</button>
+            <button className="pixel-font text-white text-5xl text-center hover:text-pokemon-yellow duration-300">Enter</button>
           </Link>
         </div>
     </div>
