@@ -22,7 +22,7 @@ export default function PokemonDetailPage() {
 
     return (
         <div>
-            little butt
+            little ass
         </div>
     )
 }
