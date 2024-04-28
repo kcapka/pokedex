@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-
+import useWindowSize from '~/utilities/useWindowSize';
 
 export default function PokeHero() {
     const [contentHeight, setContentHeight] = useState('min-h-[100svh]');
+
+    const {width} = useWindowSize();
+    const isMobile = width < 640;
 
     useEffect(() => {
         setTimeout(() => {setContentHeight('min-h-[250px] md:min-h-[400px]')}, 2500);
@@ -19,11 +22,11 @@ export default function PokeHero() {
             }} />
             <motion.img src="/images/logo/pokeball.png" alt="Pokeball" className='w-[40px] md:w-[75px] absolute left-0 top-[50%] '
             initial={{x: -400, rotate: 0, opacity: 0}}
-            animate={{x: -100, rotate: 360, opacity: 1}}
+            animate={{x: isMobile ? -40 : -100, rotate: 360, opacity: 1}}
             transition={{duration: 1, type: 'spring', delay: 1}} />
             <motion.img src="/images/logo/pokeball.png" alt="Pokeball" className='w-[40px] md:w-[75px] absolute right-0 top-[50%]'
             initial={{x: 400, rotate: 0, opacity: 0}}
-            animate={{x: 100, rotate: -360, opacity: 1}}
+            animate={{x: isMobile ? 40 : 100, rotate: -360, opacity: 1}}
             transition={{duration: 1, type: 'spring', delay: 1.5}} />
             </div>
         </section>

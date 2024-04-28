@@ -15,6 +15,13 @@
     font-weight: 400;
     font-style: normal;
 }
+* {
+  scroll-behavior: smooth;
+}
+
+.box-shadow {
+  box-shadow: 5px 10px 20px rgba(0,0,0,0.3);
+}
 
 
 @layer utilities {

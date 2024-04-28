@@ -29,8 +29,6 @@ export default function PokemonCard({id, cardOpen, setCardOpen}:any) {
       const pokemonHeight = `${pokemon?.height / 10}m`;
       const pokemonWeight = `${pokemon?.weight / 10}kg`;
 
-      console.log(pokemon)
-
     return(
         <section className="fixed top-0 left-0 w-[100svw] h-[100svh] bg-[rgba(255,255,255,0.5)] text-black z-20">
           {loading && (

@@ -24,7 +24,7 @@ export default function Pagination({selectedPage, setSelectedPage}:any) {
     }
 
     return (
-        <div className="flex gap-2 md:gap-5 mt-10 text-white text-lg md:text-3xl">
+        <div className="flex gap-2 md:gap-5 mt-10 text-white text-lg md:text-3xl" id="pagination">
             <p onClick={handlePrevious} className="cursor-pointer hover:text-pokemon-yellow">Previous</p>
             {pages.map((page, i) => (
                 <p key={i} className={`${selectedPage == i * 100 ? "text-pokemon-yellow": ""} cursor-pointer hover:text-pokemon-yellow`} onClick={() => handlePageSelect(i)}>{page}</p>
