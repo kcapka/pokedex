@@ -21,8 +21,13 @@ export default function PokemonDetailPage() {
     console.log(loaderData);
 
     return (
-        <div>
-            little ass
+        <div className="min-h-[100svh] bg-pokemon-gray default-px default-py">
+            <section className="max-w-[800px] mx-auto">
+              <div className="flex justify-between items-center">
+                <img src="/images/pokemon-logo.png" className="w-[300px]" alt="Pokemon logo" />
+                <p>test</p>
+              </div>
+            </section>
         </div>
     )
 }
