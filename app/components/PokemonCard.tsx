@@ -48,7 +48,7 @@ export default function PokemonCard({ id, cardOpen, setCardOpen }: any) {
             <img src={sprite} className="w-[200px] mx-auto" />
           </div>
           <p className="mx-auto mb-5 text-center">{`NO. ${id} ${pokemon?.types[0].type?.name} Pokemon HT: ${pokemonHeight} WT: ${pokemonWeight}`}</p>
-          <h3 className="text-xl font-bold mb-3">Cry</h3>
+          {/* <h3 className="text-xl font-bold mb-3">Cry</h3>
           {pokemon?.cries && (
             <div className="w-full mb-5">
             <AudioPlayer src={pokemon.cries?.latest} 
@@ -56,10 +56,10 @@ export default function PokemonCard({ id, cardOpen, setCardOpen }: any) {
             showJumpControls={false}
             showFilledVolume={false}/>
             </div>
-          )}
+          )} */}
           <div>
             <h3 className="font-bold text-xl mb-3">Types</h3>
-            <div className="flex gap-1">
+            <div className="flex gap-1 justify-center">
               {pokemon?.types.map((item: any, index: any) => (
                 <div key={index}>
                   <img
