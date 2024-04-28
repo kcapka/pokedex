@@ -80,7 +80,7 @@ export default function PokemonCard({ id, cardOpen, setCardOpen }: any) {
             whileHover={{scale: 1.05}}
           />
           <Link to={`/pokemon/${pokemon?.name}`}>
-            <motion.button className="absolute bottom-2 right-2 text-xl bg-pokemon-gray border-2 border-pokemon-dark-gray rounded px-3 py-1 text-pokemon-dark-blue"
+            <motion.button className="absolute bottom-2 right-2 text-xl bg-pokemon-blue border-2 border-pokemon-dark-blue rounded px-3 py-1 text-pokemon-dark-blue"
             initial={{scale: 1}}
             whileHover={{scale: 1.05}}>
               Learn More

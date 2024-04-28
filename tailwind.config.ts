@@ -12,7 +12,7 @@ export default {
         'pokemon-yellow': 'rgba(251,221,75)',
         'pokemon-dark-yellow': 'rgba(177,160,64)',
         'pokemon-gray': 'rgb(204,210,203)',
-        'pokemon-dark-gray': 'rgb(119.130,114)',
+        'pokemon-dark-gray': 'rgb(133,137,126)',
       }
     },
   },
