@@ -1,8 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import PokeHero from "~/components/PokeHero";
-import PokeListAll from "~/components/PokeListAll";
-import { useState } from "react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,20 +9,17 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-const backgroundGradient = {
-  backgroundImage: "linnear-gradient(to bottom, rgba(188,38,26), rgba(235,51,35))",
-}
 
 
 
 export default function Index() {
 
   return (
-    <div className="min-h-[100svh] bg-pokemon-dark-blue" style={backgroundGradient}>
+    <div className="min-h-[100svh] bg-pokemon-dark-blue">
         <PokeHero />
         <div className="mt-20 flex justify-center">
           <Link to="/home">
-            <button className="pixel-font text-white text-5xl text-center hover:text-pokemon-yellow duration-300">Enter</button>
+            <button className="text-2xl text-white text-center mb-5 md:mb-10 bg-pokemon-blue px-5 py-3 rounded hover:bg-white hover:text-black duration-300 box-shadow">Enter</button>
           </Link>
         </div>
     </div>
