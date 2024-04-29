@@ -89,9 +89,9 @@ export default function PokeListAll() {
 
   return (
     <div className="flex flex-col items-center pixel-font default-py default-px bg-pokemon-dark-blue min-h-[100svh]">
-      <img src="/images/logo/logo.png" alt="Pokedex logo" className="mb-20" />
-      <div className="flex flex-col items-center">
-      <Link to="#pagination">
+      <motion.img src="/images/logo/logo.png" alt="Pokedex logo" className="mb-20" initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 1}} />
+      <motion.div className="flex flex-col items-center" initial={{opacity: 0, y: 100}} animate={{opacity: 1, y: 0}} transition={{duration: 0.6}}>
+        <Link to="#pagination">
           <p
             className="text-2xl text-white text-center mb-5 md:mb-10 bg-pokemon-blue px-5 py-3 rounded cursor-pointer hover:bg-white hover:text-black duration-300 box-shadow"
             onClick={handleShowAll}
@@ -118,12 +118,14 @@ export default function PokeListAll() {
             Search
           </button>
         </div>
-      </div>
+      </motion.div>
       {pokemon.length > 1 && (
-        <Pagination
-          selectedPage={selectedPage}
-          setSelectedPage={setSelectedPage}
-        />
+        <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{delay: 0.6}}>
+          <Pagination
+            selectedPage={selectedPage}
+            setSelectedPage={setSelectedPage}
+          />
+        </motion.div>
       )}
       {pokemon && (
         <div
@@ -139,7 +141,7 @@ export default function PokeListAll() {
               key={id}
               onClick={() => handleSelectedPokemon(id)}
               initial={{ opacity: 0 }}
-              transition={{ opacity: { duration: 1 } }}
+              transition={{ opacity: { duration: 0.5, delay: 0.05 * index } }}
               animate={{ opacity: 1 }}
               whileHover={{ scale: 1.1 }}
             >
