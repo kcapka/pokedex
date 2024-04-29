@@ -137,7 +137,7 @@ export default function PokeListAll() {
         >
           {pokemon.map(({ name, url, image, id, sprites }, index) => (
             <motion.div
-              className="cursor-pointer bg-pokemon-blue flex flex-col items-center justify-center p-3 md:p-5 w-[150px] md:w-[200px] h-[150px] md:h-[200px] rounded shadow-2xl border border-pokemon-yellow"
+              className="cursor-pointer bg-pokemon-blue flex flex-col items-center justify-center p-3 md:p-5 w-[150px] md:w-[200px] h-[150px] md:min-h-[200px] rounded shadow-2xl border border-pokemon-yellow"
               key={id}
               onClick={() => handleSelectedPokemon(id)}
               initial={{ opacity: 0 }}

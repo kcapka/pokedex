@@ -19,7 +19,11 @@ import { Link } from "@remix-run/react";
 export default function PokemonDetailPage() {
     const loaderData:any = useLoaderData();
     const pokemon = loaderData.data;
-    const officialArtwork = pokemon.sprites.other["official-artwork"].front_default;
+    const officialArtwork = pokemon?.sprites?.other["official-artwork"].front_default;
+
+    const pokemonHeight = `${pokemon?.height / 10}m`;
+    const pokemonWeight = `${pokemon?.weight / 10}kg`;
+    const gif = pokemon?.sprites?.other?.showdown?.front_default;
 
     console.log(pokemon)
 
@@ -33,24 +37,50 @@ export default function PokemonDetailPage() {
                 <p className="text-2xl md:text-4xl text-pokemon-dark-blue">Pokemon details</p>
               </div>
 
-              <div className="flex md:justify-between flex-col md:flex-row gap-5 md:gap-10">
+              <div className="flex md:justify-between flex-col md:flex-row gap-5 md:gap-10 mb-10 md:mb-20">
                 <div className="flex flex-col items-center bg-white border-[5px] rounded border-pokemon-dark-blue p-5 md:flex-[1.5] shadow-xl">
-                  <h1 className="text-center text-white rounded py-1 px-5 capitalize text-3xl md:text-5xl bg-pokemon-dark-blue mb-5">{pokemon.name}</h1>
-                  <img src={officialArtwork} alt = {`${pokemon.name} image`} className="max-w-[200px] md:max-w-[300px]" />
+                  <h1 className="text-center text-white rounded py-1 px-5 capitalize text-3xl md:text-5xl bg-pokemon-dark-blue mb-5">{pokemon?.name}</h1>
+                  <img src={officialArtwork} alt = {`${pokemon?.name} image`} className="max-w-[200px] md:max-w-[300px]" />
                 </div>
-                <div className="flex flex-col items-center bg-white border-[5px] rounded border-pokemon-dark-blue py-5 px-5 flex-1 shadow-xl">
-                  <h1 className="text-center text-white rounded py-1 px-5 capitalize text-3xl md:text-5xl bg-pokemon-dark-blue mb-5">Stats</h1>
-                  <ul className="w-full text-xl md:text-2xl text-pokemon-dark-blue">
-                    {pokemon.stats && pokemon.stats.map((stat:any, index:any) => (
-                      <li key={index} className="flex justify-between w-full">
-                        <p>Base {stat.stat.name}:</p>
-                        <p>{stat.base_stat}</p>
+                <div className="bg-white border-[5px] rounded border-pokemon-dark-blue p-5 md:flex-1 shadow-xl">
+                  <h1 className="text-center text-white rounded py-1 px-5 capitalize text-3xl md:text-5xl bg-pokemon-dark-blue mb-5">Basic Info</h1>
+                  <div className="text-xl md:text-2xl text-pokemon-dark-blue text-start flex flex-col items-center">
+                    <ul className="w-full mb-16">
+                      <li className="flex justify-between">
+                        <p>ID:</p>
+                        <p>#{pokemon?.id}</p>
                       </li>
-                    ))}
-                  </ul>
+                      <li className="flex justify-between">
+                        <p>Height:</p>
+                        <p>{pokemonHeight}</p>
+                      </li>
+                      <li className="flex justify-between">
+                        <p>Weight:</p>
+                        <p>{pokemonWeight}</p>
+                      </li>
+                    </ul>
+                    <img src={gif} alt= {`${pokemon?.name} gif`} className="h-[100px] mb-10" />
+                  </div>
                 </div>
-              </div>
 
+              </div>
+              <div className="flex md:justify-between flex-col md:flex-row gap-5 md:gap-10 mb-10 md:mb-20">
+                <div className="flex flex-col items-center bg-white border-[5px] rounded border-pokemon-dark-blue py-5 px-5 flex-1 shadow-xl">
+                    <h1 className="text-center text-white rounded py-1 px-5 capitalize text-3xl md:text-5xl bg-pokemon-dark-blue mb-5">Stats</h1>
+                    <ul className="w-full text-xl md:text-2xl text-pokemon-dark-blue">
+                      {pokemon?.stats && pokemon.stats.map((stat:any, index:any) => (
+                        <li key={index} className="flex justify-between w-full">
+                          <p>Base {stat?.stat?.name}:</p>
+                          <p>{stat?.base_stat}</p>
+                        </li>
+                      ))}
+                      <li className="flex justify-between w-full">
+                        <p>Base experience:</p>
+                        <p>{pokemon?.base_experience}</p>
+                      </li>
+                    </ul>
+                  </div>
+              </div>
 
 
             </section>
